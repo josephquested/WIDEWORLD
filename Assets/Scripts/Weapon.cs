@@ -6,6 +6,8 @@ public class Weapon : MonoBehaviour {
 
 	public StateMachine sm;
 
+	public AudioSource audioSource;
+
 	public GameObject prefab;
 
 	public bool down;
@@ -15,10 +17,12 @@ public class Weapon : MonoBehaviour {
 	public bool cool;
 
 	public float cooldown;
+	public float velocity;
 
 	void Awake ()
 	{
 		sm = transform.parent.gameObject.GetComponent<StateMachine>();
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	void Update ()
@@ -48,5 +52,26 @@ public class Weapon : MonoBehaviour {
 		down = _down;
 		up = _up;
 		axis = _axis;
+	}
+
+	public Vector2 GetDirection ()
+	{
+		switch (sm.direction)
+		{
+			case Directions.North:
+				return Vector2.up;
+
+			case Directions.East:
+				return Vector2.right;
+
+			case Directions.South:
+				return -Vector2.up;
+
+			case Directions.West:
+				return -Vector2.right;
+
+			default:
+				return Vector2.zero;
+		}
 	}
 }

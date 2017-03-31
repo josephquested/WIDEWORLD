@@ -19,6 +19,8 @@ public class Pistol : Weapon {
 	void Fire ()
 	{
 		GameObject bullet = Instantiate(prefab, transform.position, transform.rotation);
+		bullet.GetComponent<Rigidbody2D>().AddForce(GetDirection() * velocity);
+		audioSource.Play();
 	}
 
 	IEnumerator Cooldown ()
