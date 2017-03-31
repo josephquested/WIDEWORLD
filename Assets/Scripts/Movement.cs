@@ -5,7 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour {
 
 	StateMachine sm;
-	Rigidbody rb;
+	Animator animator;
 
 	float horizontal;
 	float vertical;
@@ -13,26 +13,43 @@ public class Movement : MonoBehaviour {
 	void Start ()
 	{
 		sm = GetComponent<StateMachine>();
-		rb = GetComponent<Rigidbody>();
+		animator = GetComponent<Animator>();
 	}
 
 	void Update ()
 	{
 		UpdateMovement();
+		UpdateAnimator();
 	}
 
 	void UpdateMovement ()
 	{
 		if (sm.canMove)
 		{
-			Move();
+			Move(GetMovementVector());
 		}
 	}
 
-	void Move ()
+	void Move (Vector2 movement)
 	{
-		Vector3 force = new Vector3(horizontal, 0, vertical) * sm.speed;
-		rb.AddForce(force);
+		transform.Translate(movement * sm.speed);
+	}
+
+	Vector2 GetMovementVector ()
+	{
+		if (horizontal != 0)
+		{
+			return new Vector2(horizontal, 0);
+		}
+		else
+		{
+			return new Vector2(0, vertical);
+		}
+	}
+
+	void UpdateAnimator ()
+	{
+		animator.SetBool("moving", sm.state == States.Moving);
 	}
 
 	public void ReceiveInput (float h, float v)
