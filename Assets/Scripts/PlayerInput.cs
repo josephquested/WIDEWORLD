@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour {
 
 	Movement movement;
+	StateMachine sm;
 	Facing facing;
 
 	void Start ()
 	{
+		sm = GetComponent<StateMachine>();
 		movement = GetComponent<Movement>();
 		facing = GetComponent<Facing>();
 	}
@@ -17,6 +19,12 @@ public class PlayerInput : MonoBehaviour {
 	{
 		UpdateFacing();
 		UpdateMovement();
+		UpdateDirLock();
+	}
+
+	void UpdateDirLock ()
+	{
+		sm.dirLock = Input.GetButton("DirLock");
 	}
 
 	void UpdateMovement ()
