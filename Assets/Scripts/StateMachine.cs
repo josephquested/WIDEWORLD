@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 public enum States { Idle, Moving };
+public enum Directions { North, East, South, West };
 
 // 0: Idle
 // 1: Moving
@@ -11,8 +12,10 @@ public enum States { Idle, Moving };
 public class StateMachine : MonoBehaviour {
 
 	public States state = States.Idle;
+	public Directions direction = Directions.South;
 
 	public float speed;
+	public bool dirLock;
 
 	public void AttemptTransition (States newState)
 	{
@@ -22,7 +25,15 @@ public class StateMachine : MonoBehaviour {
 		}
 	}
 
-	bool CanTransition (States newState)
+	public void AttemptTurn (Directions newDirection)
+	{
+		if (!dirLock)
+		{
+			direction = newDirection;
+		}
+	}
+
+	public bool CanTransition (States newState)
 	{
 		switch (state)
 		{

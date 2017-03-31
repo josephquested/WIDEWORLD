@@ -50,13 +50,13 @@ public class Movement : MonoBehaviour {
 
 	Vector2 GetMovementVector ()
 	{
-		if (horizontal != 0)
+		if (vertical != 0)
 		{
-			return new Vector2(horizontal, 0);
+			return new Vector2(0, vertical);
 		}
 		else
 		{
-			return new Vector2(0, vertical);
+			return new Vector2(horizontal, 0);
 		}
 	}
 
