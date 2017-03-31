@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum States { Idle, Moving };
@@ -7,18 +8,26 @@ public enum States { Idle, Moving };
 public class StateMachine : MonoBehaviour {
 
 	public States state = States.Idle;
+
 	public bool canMove = true;
 	public float speed;
 
-	// public bool CanTransition (States newState)
-	// {
-	// 	switch (state)
-	// 	{
-	// 		case States.Idle:
-	// 			// declare an IdleTransitions enum or array
-	// 			// if newState is in IdleTransition enum/array, return true,
-	// 			// else, return false
-	// 			break;
-	// 	}
-	// }
+	void Start ()
+	{
+		print(CanTransition(States.Moving));
+	}
+
+	public bool CanTransition (States newState)
+	{
+		switch (state)
+		{
+			case States.Idle:
+				int[] idleTransitions = new int[] { 1 };
+				return idleTransitions.Contains((int)newState);
+				break;
+
+			default:
+				return false;
+		}
+	}
 }
