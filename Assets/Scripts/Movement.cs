@@ -18,13 +18,26 @@ public class Movement : MonoBehaviour {
 
 	void Update ()
 	{
+		UpdateState();
 		UpdateMovement();
 		UpdateAnimator();
 	}
 
+	void UpdateState ()
+	{
+		if (horizontal != 0 || vertical != 0)
+		{
+			sm.AttemptTransition(States.Moving);
+		}
+		else
+		{
+			sm.AttemptTransition(States.Idle);
+		}
+	}
+
 	void UpdateMovement ()
 	{
-		if (sm.canMove)
+		if (sm.CanMove())
 		{
 			Move(GetMovementVector());
 		}
