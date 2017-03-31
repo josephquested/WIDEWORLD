@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum States { Idle, Moving };
+public enum States { Idle, Moving, Attacking };
 public enum Directions { North, East, South, West };
 
 // 0: Idle
@@ -17,11 +17,16 @@ public class StateMachine : MonoBehaviour {
 	public float speed;
 	public bool dirLock;
 
-	public void AttemptTransition (States newState)
+	public bool AttemptTransition (States newState)
 	{
 		if (CanTransition(newState))
 		{
 			state = newState;
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 
@@ -38,11 +43,15 @@ public class StateMachine : MonoBehaviour {
 		switch (state)
 		{
 			case States.Idle:
-				return new int[] { 1 }.Contains((int)newState);
+				return new int[] { 1, 2 }.Contains((int)newState);
 				break;
 
 			case States.Moving:
-				return new int[] { 0 }.Contains((int)newState);
+				return new int[] { 0, 2 }.Contains((int)newState);
+				break;
+
+			case States.Attacking:
+				return new int[] { 0, 1 }.Contains((int)newState);
 				break;
 
 			default:

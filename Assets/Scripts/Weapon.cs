@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour {
 
-	StateMachine sm;
+	public StateMachine sm;
 
 	public GameObject prefab;
 
-	bool down;
-	bool up;
+	public bool down;
+	public bool up;
+	public float axis;
 
-	float axis;
+	public bool cool;
+
+	public float cooldown;
 
 	void Awake ()
 	{
-		sm = GetComponent<StateMachine>();
+		sm = transform.parent.gameObject.GetComponent<StateMachine>();
 	}
 
 	void Update ()
