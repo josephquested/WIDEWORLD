@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour {
 
 	StateMachine sm;
+
 	Animator animator;
 
 	float horizontal;

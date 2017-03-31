@@ -38,13 +38,11 @@ public class StateMachine : MonoBehaviour {
 		switch (state)
 		{
 			case States.Idle:
-				int[] idleTransitions = new int[] { 1 };
-				return idleTransitions.Contains((int)newState);
+				return new int[] { 1 }.Contains((int)newState);
 				break;
 
 			case States.Moving:
-				int[] movingTransitions = new int[] { 0 };
-				return movingTransitions.Contains((int)newState);
+				return new int[] { 0 }.Contains((int)newState);
 				break;
 
 			default:

@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour {
 
-	Movement movement;
 	StateMachine sm;
+
+	Movement movement;
 	Facing facing;
+
+	public Weapon weapon1;
+	public Weapon weapon2;
 
 	void Start ()
 	{
@@ -20,6 +24,8 @@ public class PlayerInput : MonoBehaviour {
 		UpdateFacing();
 		UpdateMovement();
 		UpdateDirLock();
+		UpdateWeapon(weapon1, 1);
+		UpdateWeapon(weapon2, 2);
 	}
 
 	void UpdateDirLock ()
@@ -35,5 +41,14 @@ public class PlayerInput : MonoBehaviour {
 	void UpdateFacing ()
 	{
 		facing.ReceiveInput(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+	}
+
+	void UpdateWeapon (Weapon weapon, int which)
+	{
+		weapon.ReceiveInputs(
+			Input.GetButtonDown("Fire" + which.ToString()),
+			Input.GetButtonUp("Fire" + which.ToString()),
+			Input.GetAxis("Fire" + which.ToString())
+		);
 	}
 }

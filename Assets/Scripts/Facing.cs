@@ -5,6 +5,7 @@ using UnityEngine;
 public class Facing : MonoBehaviour {
 
 	StateMachine sm;
+
 	Animator animator;
 
 	float horizontal;
