@@ -44,15 +44,12 @@ public class StateMachine : MonoBehaviour {
 		{
 			case States.Idle:
 				return new int[] { 1, 2 }.Contains((int)newState);
-				break;
 
 			case States.Moving:
 				return new int[] { 0, 2 }.Contains((int)newState);
-				break;
 
 			case States.Attacking:
 				return new int[] { 0, 1 }.Contains((int)newState);
-				break;
 
 			default:
 				return false;

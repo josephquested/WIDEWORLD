@@ -7,6 +7,7 @@ public class PlayerInput : MonoBehaviour {
 	StateMachine sm;
 
 	Movement movement;
+	
 	Facing facing;
 
 	public Weapon weapon1;
