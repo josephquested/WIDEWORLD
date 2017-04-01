@@ -14,9 +14,6 @@ public class Weapon : MonoBehaviour {
 	public bool up;
 	public float axis;
 
-	public bool cool;
-
-	public float cooldown;
 	public float velocity;
 
 	void Awake ()

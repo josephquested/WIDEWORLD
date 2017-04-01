@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class Pistol : Weapon {
 
+	Rigidbody2D rb;
+
+	public float recoil;
+
+	void Start ()
+	{
+		rb = transform.parent.GetComponent<Rigidbody2D>();
+	}
+
 	public override void OnDown ()
 	{
-		if (down && cool)
+		if (down)
 		{
 			if (sm.AttemptTransition(States.Attacking))
 			{
 				Fire();
-				StartCoroutine(Cooldown());
+				Recoil();
 			}
 		}
 	}
@@ -23,10 +32,8 @@ public class Pistol : Weapon {
 		audioSource.Play();
 	}
 
-	IEnumerator Cooldown ()
+	void Recoil ()
 	{
-		cool = false;
-		yield return new WaitForSeconds(cooldown);
-		cool = true;
+		rb.AddForce(-GetDirection() * recoil, ForceMode2D.Impulse);
 	}
 }
