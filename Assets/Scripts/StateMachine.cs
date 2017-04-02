@@ -14,7 +14,6 @@ public class StateMachine : MonoBehaviour {
 	public States state = States.Idle;
 	public Directions direction = Directions.South;
 
-	public float speed;
 	public bool dirLock;
 
 	public bool AttemptTransition (States newState)

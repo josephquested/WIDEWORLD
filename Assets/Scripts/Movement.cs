@@ -8,6 +8,8 @@ public class Movement : MonoBehaviour {
 
 	Animator animator;
 
+	public float speed;
+
 	float horizontal;
 	float vertical;
 
@@ -46,7 +48,7 @@ public class Movement : MonoBehaviour {
 
 	void Move (Vector2 movement)
 	{
-		transform.Translate(movement * sm.speed);
+		transform.Translate(movement * speed);
 	}
 
 	Vector2 GetMovementVector ()

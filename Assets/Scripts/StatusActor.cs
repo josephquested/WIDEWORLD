@@ -14,7 +14,10 @@ public class StatusActor : Status {
 
 	public override void ReceiveDamage (int damage)
 	{
-		hitpoints -= damage;
+		if (!invulnerable)
+		{
+			hitpoints -= damage;
+		}
 	}
 
 	void Die ()
