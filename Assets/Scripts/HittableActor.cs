@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class HittableActor : Hittable {
 
-	int hitpoints;
+	Status status;
+
+	void Start ()
+	{
+		status = GetComponent<Status>();
+	}
 
 	public override void ReceiveDamage (int damage)
 	{
-		// override
+		status.ReceiveDamage(damage);
 	}
 
 	public override void ReceiveKnockback (Vector2 direction, float force)
