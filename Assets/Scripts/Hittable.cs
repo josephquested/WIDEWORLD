@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Hittable : MonoBehaviour {
 
-	public void ReceiveDamage (int damage)
+	public virtual void ReceiveDamage (int damage)
 	{
 		// override
 	}
 
-	public void ReceiveKnockback (float knockback)
+	public virtual void ReceiveKnockback (Vector2 direction, float force)
 	{
 		// override
 	}

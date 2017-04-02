@@ -11,7 +11,7 @@ public class Bullet : Projectile {
 	public override void OnHittableEnter (Hittable hittable)
 	{
 		hittable.ReceiveDamage(damage);
-		hittable.ReceiveKnockback(knockback);
+		hittable.ReceiveKnockback(GetComponent<Rigidbody2D>().velocity, knockback);
 		Destroy(gameObject);
 	}
 }
