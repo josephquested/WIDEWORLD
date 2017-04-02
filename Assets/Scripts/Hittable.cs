@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Damageable : MonoBehaviour {
-
-	bool invulnerable;
+public class Hittable : MonoBehaviour {
 
 	public void ReceiveDamage (int damage)
 	{
-		print(gameObject.name + " recieved damage: " + damage);
+		// override
+	}
+
+	public void ReceiveKnockback (float knockback)
+	{
+		// override
 	}
 }

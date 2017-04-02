@@ -13,13 +13,13 @@ public class Projectile : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D collider)
 	{
-		if (collider.GetComponent<Damageable>() != null && collider.transform != parent)
+		if (collider.GetComponent<Hittable>() != null && collider.transform != parent)
 		{
-			OnDamageableEnter(collider.GetComponent<Damageable>());
+			OnHittableEnter(collider.GetComponent<Hittable>());
 		}
 	}
 
-	public virtual void OnDamageableEnter (Damageable damageable)
+	public virtual void OnHittableEnter (Hittable hittable)
 	{
 		// override
 	}

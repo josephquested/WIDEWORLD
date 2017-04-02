@@ -8,9 +8,10 @@ public class Bullet : Projectile {
 
 	public float knockback;
 
-	public override void OnDamageableEnter (Damageable damageable)
+	public override void OnHittableEnter (Hittable hittable)
 	{
-		damageable.ReceiveDamage(damage);
+		hittable.ReceiveDamage(damage);
+		hittable.ReceiveKnockback(knockback);
 		Destroy(gameObject);
 	}
 }
