@@ -1,0 +1,3 @@
+melee weapon:
+  on down, creates a projectile with no forwards momentum.
+  depending on its direction, it will need a sprite layer change
