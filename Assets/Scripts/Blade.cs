@@ -12,6 +12,6 @@ public class Blade : Hit {
 	{
 		hittable.ReceiveDamage(damage);
 		hittable.ReceiveKnockback(attackDirection, knockback);
-		Destroy(gameObject);
+		Destroy(this);
 	}
 }

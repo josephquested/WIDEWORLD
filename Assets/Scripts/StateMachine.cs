@@ -62,7 +62,7 @@ public class StateMachine : MonoBehaviour {
 
 	public bool CanMove ()
 	{
-		int[] moveableStates = new int[] { 1, 2, 3 };
+		int[] moveableStates = new int[] { 1, 2 };
 		return moveableStates.Contains((int)state);
 	}
 }

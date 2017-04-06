@@ -4,30 +4,36 @@ using UnityEngine;
 
 public class WeaponProjectile : Weapon {
 
-  Rigidbody2D rb;
-
   public float velocity;
 
   public float recoil;
 
-  void Start ()
+  // FIRE FUNCTIONS //
+
+	public virtual void FireStart ()
+	{
+		GameObject hitObj = InstantiateHit();
+
+    Recoil();
+		audioSource.Play();
+    StartCoroutine(FireRoutine(hitObj));
+	}
+
+  public virtual IEnumerator FireRoutine (GameObject hitObj)
   {
-    rb = transform.parent.GetComponent<Rigidbody2D>();
+    sm.AttemptTransition(States.Break);
+    Destroy(hitObj, 10f);
+    yield return null;
   }
 
-	public virtual void FireInit ()
-	{
-		GameObject projectileObj = Instantiate(prefab, transform.position, transform.rotation);
-		projectileObj.GetComponent<Hit>().SetParent(transform.parent);
-    projectileObj.GetComponent<Hit>().attackDirection = GetDirection();
-		projectileObj.GetComponent<Rigidbody2D>().AddForce(GetDirection() * velocity);
-
-		audioSource.Play();
-
-  	Recoil();
-
-		sm.AttemptTransition(States.Break);
-	}
+  GameObject InstantiateHit ()
+  {
+    GameObject hitObj = Instantiate(prefab, transform.position, transform.rotation);
+    hitObj.GetComponent<Hit>().SetParent(transform.parent);
+    hitObj.GetComponent<Hit>().attackDirection = GetDirection();
+    hitObj.GetComponent<Rigidbody2D>().AddForce(GetDirection() * velocity);
+    return hitObj;
+  }
 
 	public virtual void Recoil ()
 	{

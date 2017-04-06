@@ -6,6 +6,8 @@ public class Weapon : MonoBehaviour {
 
 	public StateMachine sm;
 
+	public Rigidbody2D rb;
+
 	public AudioSource audioSource;
 
 	public GameObject prefab;
@@ -17,6 +19,7 @@ public class Weapon : MonoBehaviour {
 	void Awake ()
 	{
 		sm = transform.parent.gameObject.GetComponent<StateMachine>();
+		rb = transform.parent.GetComponent<Rigidbody2D>();
 		audioSource = GetComponent<AudioSource>();
 	}
 

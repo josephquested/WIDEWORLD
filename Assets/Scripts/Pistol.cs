@@ -10,7 +10,7 @@ public class Pistol : WeaponProjectile {
 		{
 			if (sm.AttemptTransition(States.Attacking))
 			{
-				FireInit();
+				FireStart();
 			}
 		}
 	}

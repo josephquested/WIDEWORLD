@@ -4,23 +4,18 @@ using UnityEngine;
 
 public class WeaponMelee : Weapon {
 
-  Rigidbody2D rb;
-
   public float thrust;
 
   public float attackDuration;
 
-  void Start ()
-  {
-    rb = transform.parent.GetComponent<Rigidbody2D>();
-  }
-
-  // fire functions //
+  // FIRE FUNCTIONS //
 
   public virtual void FireStart ()
   {
     GameObject hitObj = InstantiateHit();
     PlaceMeleeObject(hitObj);
+
+    Thrust();
     audioSource.Play();
     StartCoroutine(FireRoutine(hitObj));
   }
@@ -28,8 +23,8 @@ public class WeaponMelee : Weapon {
   public virtual IEnumerator FireRoutine (GameObject hitObj)
   {
     yield return new WaitForSeconds(attackDuration);
-    Destroy(hitObj);
     sm.AttemptTransition(States.Break);
+    Destroy(hitObj);
   }
 
   GameObject InstantiateHit ()
@@ -46,7 +41,7 @@ public class WeaponMelee : Weapon {
 		rb.AddForce(GetDirection() * thrust, ForceMode2D.Impulse);
 	}
 
-  // melee hit helper fuctions //
+  // HIT HELPERS //
 
   public void PlaceMeleeObject (GameObject hitObj)
   {
