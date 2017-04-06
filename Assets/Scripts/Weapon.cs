@@ -14,8 +14,6 @@ public class Weapon : MonoBehaviour {
 	public bool up;
 	public float axis;
 
-	public float velocity;
-
 	void Awake ()
 	{
 		sm = transform.parent.gameObject.GetComponent<StateMachine>();

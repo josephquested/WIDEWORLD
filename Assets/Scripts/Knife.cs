@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Knife : Weapon {
+public class Knife : WeaponMelee {
 
 	Rigidbody2D rb;
-
-	public float thrust;
 
 	void Start ()
 	{
