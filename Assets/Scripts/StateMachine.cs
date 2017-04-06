@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum States { Idle, Moving, Attacking };
+public enum States { Break, Idle, Moving, Attacking };
 public enum Directions { North, East, South, West };
 
-// 0: Idle
-// 1: Moving
+// 0: Break
+// 1: Idle
+// 2: Moving
+// 3: Attacking
 
 public class StateMachine : MonoBehaviour {
 
@@ -41,14 +43,17 @@ public class StateMachine : MonoBehaviour {
 	{
 		switch (state)
 		{
+			case States.Break:
+				return new int[] { 1, 2, 3 }.Contains((int)newState);
+
 			case States.Idle:
-				return new int[] { 1, 2 }.Contains((int)newState);
+				return new int[] { 0, 2, 3 }.Contains((int)newState);
 
 			case States.Moving:
-				return new int[] { 0, 2 }.Contains((int)newState);
+				return new int[] { 0, 1, 3 }.Contains((int)newState);
 
 			case States.Attacking:
-				return new int[] { 0, 1 }.Contains((int)newState);
+				return new int[] { 0 }.Contains((int)newState);
 
 			default:
 				return false;
@@ -57,7 +62,7 @@ public class StateMachine : MonoBehaviour {
 
 	public bool CanMove ()
 	{
-		int[] moveableStates = new int[] { 1 };
+		int[] moveableStates = new int[] { 1, 2, 3 };
 		return moveableStates.Contains((int)state);
 	}
 }
