@@ -23,14 +23,6 @@ public class Knife : WeaponMelee {
 		}
 	}
 
-	void Fire ()
-	{
-		GameObject blade = Instantiate(prefab, transform.position, transform.rotation);
-		blade.GetComponent<Blade>().SetParent(transform.parent);
-		PlaceMeleePrefab(blade);
-		audioSource.Play();
-	}
-
 	void Thrust ()
 	{
 		rb.AddForce(GetDirection() * thrust, ForceMode2D.Impulse);

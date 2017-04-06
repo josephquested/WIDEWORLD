@@ -6,37 +6,52 @@ public class WeaponMelee : Weapon {
 
   public float thrust;
 
-  public void PlaceMeleePrefab (GameObject prefab)
+  public float attackDuration;
+
+  public virtual void Fire ()
   {
-    PositionMeleePrefab(prefab);
-    RotateMeleePrefab(prefab);
-    LayerMeleePrefab(prefab);
+    GameObject weaponObj = Instantiate(prefab, transform.position, transform.rotation);
+    weaponObj.GetComponent<Hit>().SetParent(transform.parent);
+    weaponObj.transform.parent = transform.parent;
+
+    PlaceMeleePrefab(weaponObj);
+
+    audioSource.Play();
+
+    Destroy(weaponObj, attackDuration);
   }
 
-  public void PositionMeleePrefab (GameObject prefab)
+  public void PlaceMeleePrefab (GameObject weaponObj)
+  {
+    PositionMeleePrefab(weaponObj);
+    RotateMeleePrefab(weaponObj);
+    LayerMeleePrefab(weaponObj);
+  }
+
+  void PositionMeleePrefab (GameObject weaponObj)
   {
     Vector2 v2 = GetDirection() / 2;
     Vector3 direction = new Vector3(v2.x, v2.y, 0f);
-    prefab.transform.position += direction;
+    weaponObj.transform.position += direction;
   }
 
-  public void RotateMeleePrefab (GameObject prefab)
+  void RotateMeleePrefab (GameObject weaponObj)
   {
     switch (sm.direction)
   	{
   		case Directions.North:
-  		  prefab.transform.Rotate(new Vector3(0, 0, 90));
+  		  weaponObj.transform.Rotate(new Vector3(0, 0, 90));
         return;
 
   		case Directions.East:
   			return;
 
   		case Directions.South:
-  			prefab.transform.Rotate(new Vector3(0, 0, -90));
+  			weaponObj.transform.Rotate(new Vector3(0, 0, -90));
         return;
 
   		case Directions.West:
-  			prefab.transform.Rotate(new Vector3(0, 0, 180));
+  			weaponObj.transform.Rotate(new Vector3(0, 0, -180));
         return;
 
   		default:
@@ -44,27 +59,11 @@ public class WeaponMelee : Weapon {
   	}
   }
 
-  public void LayerMeleePrefab (GameObject prefab)
+  void LayerMeleePrefab (GameObject weaponObj)
   {
-    // switch (sm.direction)
-  	// {
-  	// 	case Directions.North:
-  	// 	  prefab.transform.Rotate(new Vector3(0, 0, 90));
-    //     return;
-    //
-  	// 	case Directions.East:
-  	// 		return;
-    //
-  	// 	case Directions.South:
-  	// 		prefab.transform.Rotate(new Vector3(0, 0, -90));
-    //     return;
-    //
-  	// 	case Directions.West:
-  	// 		prefab.transform.Rotate(new Vector3(0, 0, 180));
-    //     return;
-    //
-  	// 	default:
-  	// 		return;
-  	// }
+    if (sm.direction == Directions.South)
+    {
+      weaponObj.GetComponent<SpriteRenderer>().sortingOrder += 1;
+    }
   }
 }

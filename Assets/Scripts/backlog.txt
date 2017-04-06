@@ -1,3 +1,8 @@
 melee weapon:
-  on down, creates a projectile with no forwards momentum.
-  depending on its direction, it will need a sprite layer change
+  on melee attack, player thrusts forwards []
+  melee prefab doesn't initially appear at its maximum extension, it eases there based on weapon speed variable []
+  melee prefab has a halflife based on a melee attack duration variable []
+  melee prefab gets childed to the player, so it moves with them [X]
+
+  on down, creates a projectile with no forwards momentum. [X]
+  depending on its direction, it will need a sprite layer change [X]
