@@ -1,3 +1,6 @@
+projectile weapon:
+  refactor OO code to reflect melee weapon technique []
+
 melee weapon:
   melee prefab doesn't initially appear at its maximum extension, it eases there based on weapon speed variable []
   on melee attack, player thrusts forwards [X]

@@ -19,6 +19,7 @@ public class WeaponProjectile : Weapon {
 	{
 		GameObject projectileObj = Instantiate(prefab, transform.position, transform.rotation);
 		projectileObj.GetComponent<Hit>().SetParent(transform.parent);
+    projectileObj.GetComponent<Hit>().attackDirection = GetDirection();
 		projectileObj.GetComponent<Rigidbody2D>().AddForce(GetDirection() * velocity);
 
 		audioSource.Play();

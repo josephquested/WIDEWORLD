@@ -11,7 +11,7 @@ public class Blade : Hit {
 	public override void OnHittableEnter (Hittable hittable)
 	{
 		hittable.ReceiveDamage(damage);
-		hittable.ReceiveKnockback(GetComponent<Rigidbody2D>().velocity, knockback);
+		hittable.ReceiveKnockback(attackDirection, knockback);
 		Destroy(gameObject);
 	}
 }

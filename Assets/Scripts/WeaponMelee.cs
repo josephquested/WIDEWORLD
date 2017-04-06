@@ -36,6 +36,7 @@ public class WeaponMelee : Weapon {
   {
     GameObject hitObj = Instantiate(prefab, transform.position, transform.rotation);
     hitObj.GetComponent<Hit>().SetParent(transform.parent);
+    hitObj.GetComponent<Hit>().attackDirection = GetDirection();
     hitObj.transform.parent = transform.parent;
     return hitObj;
   }

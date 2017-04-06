@@ -6,6 +6,8 @@ public class Hit : MonoBehaviour {
 
 	Transform parent;
 
+	public Vector2 attackDirection;
+
 	public void SetParent (Transform _parent)
 	{
 		parent = _parent;
