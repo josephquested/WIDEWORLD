@@ -25,8 +25,9 @@ public class Knife : WeaponMelee {
 
 	void Fire ()
 	{
-		GameObject knife = Instantiate(prefab, transform.position, transform.rotation);
-		knife.GetComponent<Blade>().SetParent(transform.parent);
+		GameObject blade = Instantiate(prefab, transform.position, transform.rotation);
+		blade.GetComponent<Blade>().SetParent(transform.parent);
+		PlaceMeleePrefab(blade);
 		audioSource.Play();
 	}
 
