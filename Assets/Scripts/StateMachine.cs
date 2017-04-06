@@ -33,7 +33,7 @@ public class StateMachine : MonoBehaviour {
 
 	public void AttemptTurn (Directions newDirection)
 	{
-		if (!dirLock)
+		if (!dirLock && state != States.Attacking)
 		{
 			direction = newDirection;
 		}

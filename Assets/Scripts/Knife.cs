@@ -4,27 +4,14 @@ using UnityEngine;
 
 public class Knife : WeaponMelee {
 
-	Rigidbody2D rb;
-
-	void Start ()
-	{
-		rb = transform.parent.GetComponent<Rigidbody2D>();
-	}
-
 	public override void OnDown ()
 	{
 		if (down)
 		{
 			if (sm.AttemptTransition(States.Attacking))
 			{
-				Fire();
-				Thrust();
+				FireStart();
 			}
 		}
-	}
-
-	void Thrust ()
-	{
-		rb.AddForce(GetDirection() * thrust, ForceMode2D.Impulse);
 	}
 }

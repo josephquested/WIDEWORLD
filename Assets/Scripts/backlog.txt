@@ -1,8 +1,15 @@
 melee weapon:
-  on melee attack, player thrusts forwards []
   melee prefab doesn't initially appear at its maximum extension, it eases there based on weapon speed variable []
-  melee prefab has a halflife based on a melee attack duration variable []
+  on melee attack, player thrusts forwards [X]
+  melee prefab has a halflife based on a melee attack duration variable [X]
   melee prefab gets childed to the player, so it moves with them [X]
 
   on down, creates a projectile with no forwards momentum. [X]
   depending on its direction, it will need a sprite layer change [X]
+
+--
+
+melee weapons currently can not knock back a target because they don't have a rigidbody.
+this can be fixed, because their knockback is applied in a local override method of hit.
+
+this override method, on OnHittableEnter, needs to find a different method for determinting the direction of the knockback.

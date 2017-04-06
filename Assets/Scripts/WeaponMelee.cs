@@ -4,54 +4,80 @@ using UnityEngine;
 
 public class WeaponMelee : Weapon {
 
+  Rigidbody2D rb;
+
   public float thrust;
 
   public float attackDuration;
 
-  public virtual void Fire ()
+  void Start ()
   {
-    GameObject weaponObj = Instantiate(prefab, transform.position, transform.rotation);
-    weaponObj.GetComponent<Hit>().SetParent(transform.parent);
-    weaponObj.transform.parent = transform.parent;
+    rb = transform.parent.GetComponent<Rigidbody2D>();
+  }
 
-    PlaceMeleePrefab(weaponObj);
+  // fire functions //
 
+  public virtual void FireStart ()
+  {
+    GameObject hitObj = InstantiateHit();
+    PlaceMeleeObject(hitObj);
     audioSource.Play();
-
-    Destroy(weaponObj, attackDuration);
+    StartCoroutine(FireRoutine(hitObj));
   }
 
-  public void PlaceMeleePrefab (GameObject weaponObj)
+  public virtual IEnumerator FireRoutine (GameObject hitObj)
   {
-    PositionMeleePrefab(weaponObj);
-    RotateMeleePrefab(weaponObj);
-    LayerMeleePrefab(weaponObj);
+    yield return new WaitForSeconds(attackDuration);
+    Destroy(hitObj);
+    sm.AttemptTransition(States.Break);
   }
 
-  void PositionMeleePrefab (GameObject weaponObj)
+  GameObject InstantiateHit ()
+  {
+    GameObject hitObj = Instantiate(prefab, transform.position, transform.rotation);
+    hitObj.GetComponent<Hit>().SetParent(transform.parent);
+    hitObj.transform.parent = transform.parent;
+    return hitObj;
+  }
+
+	public virtual void Thrust ()
+	{
+		rb.AddForce(GetDirection() * thrust, ForceMode2D.Impulse);
+	}
+
+  // melee hit helper fuctions //
+
+  public void PlaceMeleeObject (GameObject hitObj)
+  {
+    PositionMeleeObject(hitObj);
+    RotateMeleeObject(hitObj);
+    LayerMeleeObject(hitObj);
+  }
+
+  void PositionMeleeObject (GameObject hitObj)
   {
     Vector2 v2 = GetDirection() / 2;
     Vector3 direction = new Vector3(v2.x, v2.y, 0f);
-    weaponObj.transform.position += direction;
+    hitObj.transform.position += direction;
   }
 
-  void RotateMeleePrefab (GameObject weaponObj)
+  void RotateMeleeObject (GameObject hitObj)
   {
     switch (sm.direction)
   	{
   		case Directions.North:
-  		  weaponObj.transform.Rotate(new Vector3(0, 0, 90));
+  		  hitObj.transform.Rotate(new Vector3(0, 0, 90));
         return;
 
   		case Directions.East:
   			return;
 
   		case Directions.South:
-  			weaponObj.transform.Rotate(new Vector3(0, 0, -90));
+  			hitObj.transform.Rotate(new Vector3(0, 0, -90));
         return;
 
   		case Directions.West:
-  			weaponObj.transform.Rotate(new Vector3(0, 0, -180));
+  			hitObj.transform.Rotate(new Vector3(0, 0, -180));
         return;
 
   		default:
@@ -59,11 +85,11 @@ public class WeaponMelee : Weapon {
   	}
   }
 
-  void LayerMeleePrefab (GameObject weaponObj)
+  void LayerMeleeObject (GameObject hitObj)
   {
     if (sm.direction == Directions.South)
     {
-      weaponObj.GetComponent<SpriteRenderer>().sortingOrder += 1;
+      hitObj.GetComponent<SpriteRenderer>().sortingOrder += 1;
     }
   }
 }
