@@ -8,6 +8,19 @@ public class WeaponMelee : Weapon {
 
   public float attackDuration;
 
+  // INPUTS //
+
+  public override void OnDown ()
+	{
+		if (down)
+		{
+			if (sm.AttemptTransition(States.Attacking))
+			{
+				FireStart();
+			}
+		}
+	}
+
   // FIRE FUNCTIONS //
 
   public virtual void FireStart ()

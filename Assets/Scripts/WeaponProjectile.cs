@@ -8,6 +8,19 @@ public class WeaponProjectile : Weapon {
 
   public float recoil;
 
+  // INPUTS //
+
+  public override void OnDown ()
+	{
+		if (down)
+		{
+			if (sm.AttemptTransition(States.Attacking))
+			{
+				FireStart();
+			}
+		}
+	}
+
   // FIRE FUNCTIONS //
 
 	public virtual void FireStart ()

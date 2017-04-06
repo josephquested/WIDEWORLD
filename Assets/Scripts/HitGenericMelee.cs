@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : Hit {
+public class HitGenericMelee : Hit {
 
 	public int damage;
 
@@ -12,6 +12,6 @@ public class Bullet : Hit {
 	{
 		hittable.ReceiveDamage(damage);
 		hittable.ReceiveKnockback(attackDirection, knockback);
-		Destroy(gameObject);
+		Destroy(this);
 	}
 }
