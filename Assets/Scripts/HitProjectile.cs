@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitGenericProjectile : Hit {
+public class HitProjectile : Hit {
 
 	public int damage;
 

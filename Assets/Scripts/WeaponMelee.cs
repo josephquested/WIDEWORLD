@@ -58,16 +58,31 @@ public class WeaponMelee : Weapon {
 
   public void PlaceMeleeObject (GameObject hitObj)
   {
-    PositionMeleeObject(hitObj);
+    // PositionMeleeObject(hitObj);
+    StartCoroutine(PositionHitRoutine(hitObj));
     RotateMeleeObject(hitObj);
     LayerMeleeObject(hitObj);
   }
 
-  void PositionMeleeObject (GameObject hitObj)
+  // void PositionMeleeObject (GameObject hitObj)
+  // {
+  //   Vector2 v2 = GetDirection() / 2;
+  //   Vector3 direction = new Vector3(v2.x, v2.y, 0f);
+  //   hitObj.transform.position += direction;
+  // }
+
+  public IEnumerator PositionHitRoutine (GameObject hitObj)
   {
     Vector2 v2 = GetDirection() / 2;
-    Vector3 direction = new Vector3(v2.x, v2.y, 0f);
-    hitObj.transform.position += direction;
+    Vector3 max = new Vector3(v2.x, v2.y, 0f);
+    Vector3 min = new Vector3(v2.x, v2.y, 0f) / 2;
+    float t = 0f;
+    while (t < 1)
+    {
+      t += Time.deltaTime / attackDuration * 2;
+      hitObj.transform.position = Vector3.Lerp(transform.parent.position + min, transform.parent.position + max, t);
+      yield return null;
+    }
   }
 
   void RotateMeleeObject (GameObject hitObj)

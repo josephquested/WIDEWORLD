@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitGenericMelee : Hit {
+public class HitMelee : Hit {
 
 	public int damage;
 
