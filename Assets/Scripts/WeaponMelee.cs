@@ -58,30 +58,64 @@ public class WeaponMelee : Weapon {
 
   public void PlaceMeleeObject (GameObject hitObj)
   {
-    // PositionMeleeObject(hitObj);
     StartCoroutine(PositionHitRoutine(hitObj));
     RotateMeleeObject(hitObj);
     LayerMeleeObject(hitObj);
   }
 
-  // void PositionMeleeObject (GameObject hitObj)
-  // {
-  //   Vector2 v2 = GetDirection() / 2;
-  //   Vector3 direction = new Vector3(v2.x, v2.y, 0f);
-  //   hitObj.transform.position += direction;
-  // }
-
   public IEnumerator PositionHitRoutine (GameObject hitObj)
   {
-    Vector2 v2 = GetDirection() / 2;
-    Vector3 max = new Vector3(v2.x, v2.y, 0f);
-    Vector3 min = new Vector3(v2.x, v2.y, 0f) / 2;
+    Vector2 basePos = GetDirection() / 2;
+    Vector3 start = GetHitStartPosition(basePos);
+    Vector3 max = GetHitEndPosition(basePos);
     float t = 0f;
     while (t < 1)
     {
       t += Time.deltaTime / attackDuration * 2;
-      hitObj.transform.position = Vector3.Lerp(transform.parent.position + min, transform.parent.position + max, t);
+      hitObj.transform.position = Vector3.Lerp(transform.parent.position + start, transform.parent.position + max, t);
       yield return null;
+    }
+  }
+
+  Vector3 GetHitStartPosition (Vector2 basePos)
+  {
+    switch (sm.direction)
+    {
+      case Directions.North:
+        return new Vector3(basePos.x, basePos.y, 0f) / 2;
+
+      case Directions.East:
+        return new Vector3(basePos.x, basePos.y, 0f) / 2.5f;
+
+      case Directions.South:
+        return new Vector3(basePos.x, basePos.y, 0f);
+
+      case Directions.West:
+        return new Vector3(basePos.x, basePos.y, 0f) / 2.5f;
+
+      default:
+        return new Vector3(basePos.x, basePos.y, 0f) / 1.5f;
+    }
+  }
+
+  Vector3 GetHitEndPosition (Vector2 basePos)
+  {
+    switch (sm.direction)
+    {
+      case Directions.North:
+        return new Vector3(basePos.x, basePos.y, 0f) * 1.25f;
+
+      case Directions.East:
+        return new Vector3(basePos.x, basePos.y, 0f);
+
+      case Directions.South:
+        return new Vector3(basePos.x, basePos.y, 0f) * 1.3f;
+
+      case Directions.West:
+        return new Vector3(basePos.x, basePos.y, 0f);
+
+      default:
+        return new Vector3(basePos.x, basePos.y, 0f);
     }
   }
 
