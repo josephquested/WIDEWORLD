@@ -27,10 +27,9 @@ public class WeaponMelee : Weapon {
   {
     GameObject hitObj = InstantiateHit();
     PlaceMeleeObject(hitObj);
-
-    Thrust();
     audioSource.Play();
     StartCoroutine(FireRoutine(hitObj));
+    Thrust();
   }
 
   public virtual IEnumerator FireRoutine (GameObject hitObj)
@@ -58,9 +57,9 @@ public class WeaponMelee : Weapon {
 
   public void PlaceMeleeObject (GameObject hitObj)
   {
-    StartCoroutine(PositionHitRoutine(hitObj));
     RotateMeleeObject(hitObj);
     LayerMeleeObject(hitObj);
+    StartCoroutine(PositionHitRoutine(hitObj));
   }
 
   public IEnumerator PositionHitRoutine (GameObject hitObj)

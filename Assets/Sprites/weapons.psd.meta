@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: 661a5ba0ff06046e18683baa2976bfe1
-timeCreated: 1490953022
+timeCreated: 1491535374
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: bullet
+    21300002: knife
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -80,6 +81,19 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: knife
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
